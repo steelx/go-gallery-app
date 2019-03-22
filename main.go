@@ -1,10 +1,9 @@
 package main
 
 import (
+	"github.com/gorilla/mux"
 	"go-gallery-app/views"
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
 
 var (
@@ -26,3 +25,5 @@ func home(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 }
+
+//35
