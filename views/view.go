@@ -5,8 +5,12 @@ import (
 )
 
 // NewView initiates View struct
-func NewView(files ...string) *View {
-	files = append(files, "views/layouts/footer.tpl.html")
+func NewView(layout string, files ...string) *View {
+	files = append(files,
+		"views/layouts/default.tpl.html",
+		"views/layouts/header.tpl.html",
+		"views/layouts/footer.tpl.html",
+	)
 
 	t, err := template.ParseFiles(files...)
 	if err != nil {
@@ -15,6 +19,7 @@ func NewView(files ...string) *View {
 
 	return &View{
 		Template: t,
+		Layout: layout,
 	}
 }
 

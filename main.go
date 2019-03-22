@@ -1,7 +1,7 @@
 package main
 
 import (
-	"galleryApp2019/views"
+	"go-gallery-app/views"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -12,7 +12,7 @@ var (
 )
 
 func main() {
-	homeView = views.NewView("views/home.tpl.html")
+	homeView = views.NewView("bootstrap", "views/home.tpl.html")
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", home)
@@ -21,7 +21,7 @@ func main() {
 
 func home(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	err := homeView.Template.Execute(w, nil)
+	err := homeView.Template.ExecuteTemplate(w, homeView.Layout, nil)
 	if err != nil {
 		panic(err)
 	}
