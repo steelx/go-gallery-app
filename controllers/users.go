@@ -16,7 +16,7 @@ type Users struct {
 }
 
 func (u *Users) New(w http.ResponseWriter, r *http.Request) {
-	err := u.NewView.Template.ExecuteTemplate(w, u.newView.Layout, nil)
+	err := u.NewView.Template.ExecuteTemplate(w, u.NewView.Layout, nil)
 	if err != nil {
 		panic(err)
 	}

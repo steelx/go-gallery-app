@@ -13,7 +13,7 @@ var (
 
 func main() {
 	homeView = views.NewView("bootstrap", "views/home.tpl.html")
-	usersCtrl := controllers.NewUsers("bootstrap", "views/signup.tpl.html")
+	usersCtrl := controllers.NewUsers("bootstrap", "views/users/signup.tpl.html")
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", home)
