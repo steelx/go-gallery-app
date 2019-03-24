@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"go-gallery-app/views"
 	"net/http"
 )
@@ -16,8 +17,18 @@ type Users struct {
 }
 
 func (u *Users) New(w http.ResponseWriter, r *http.Request) {
-	err := u.NewView.Template.ExecuteTemplate(w, u.NewView.Layout, nil)
+	err := u.NewView.Render(w, nil)
 	if err != nil {
 		panic(err)
 	}
+}
+
+func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Fprintln(w, r.PostForm["email"])
+	fmt.Fprintln(w, r.PostFormValue("email"))
 }

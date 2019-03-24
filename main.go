@@ -16,8 +16,11 @@ func main() {
 	usersCtrl := controllers.NewUsers("bootstrap", "views/users/signup.tpl.html")
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", home)
-	r.HandleFunc("/signup", usersCtrl.New)
+	r.HandleFunc("/", home).Methods("GET")
+
+	r.HandleFunc("/signup", usersCtrl.New).Methods("GET")
+	r.HandleFunc("/signup", usersCtrl.Create).Methods("POST")
+
 	http.ListenAndServe(":3000", r)
 }
 
@@ -29,4 +32,4 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//42
+//45
