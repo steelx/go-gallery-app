@@ -32,9 +32,16 @@ type View struct {
 	Layout   string
 }
 
+func (v *View) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	err := v.Render(w, nil)
+	if err != nil {
+		panic(err)
+	}
+}
+
 func (v *View) Render(w http.ResponseWriter, data interface{}) error {
-	err := v.Template.ExecuteTemplate(w, v.Layout, data)
-	return err
+	w.Header().Set("Content-Type", "text/html")
+	return v.Template.ExecuteTemplate(w, v.Layout, data)
 }
 
 // layoutFiles returns all template files from the destination folder
