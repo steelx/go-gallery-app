@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/gorilla/schema"
 	"go-gallery-app/views"
 	"net/http"
 )
@@ -22,6 +21,8 @@ type SignUpForm struct {
 	Password string `schema:"password"`
 }
 
+// New is used to render a sign-up page
+// GET /signup
 func (u *Users) New(w http.ResponseWriter, r *http.Request) {
 	err := u.NewView.Render(w, nil)
 	if err != nil {
@@ -29,14 +30,11 @@ func (u *Users) New(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Create is used to process a sign-up form
+// POST /signup
 func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		panic(err)
-	}
-	decoder := schema.NewDecoder()
 	var form SignUpForm
-	err = decoder.Decode(&form, r.PostForm)
+	err := ParseForm(r, &form)
 	if err != nil {
 		panic(err)
 	}
